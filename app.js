@@ -56,6 +56,19 @@ app.get('/apps', (req, res) => {
     .json(results);
 });
 
+app.use((req, res, next) => {
+  const err = new Error('Page Not Found');
+  err.status = 404;
+  next(err);
+});
+
+app.use((err, req, res, next) => {
+  res.status(err.status || 500).json({
+    message: err.message,
+    error: err
+  });
+});
+
 app.listen(8080, () => {
   console.log('Server started on PORT 8080');
 });
