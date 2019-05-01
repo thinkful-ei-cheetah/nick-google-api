@@ -1,10 +1,12 @@
+'use strict';
+
 const express = require('express');
 const morgan = require('morgan');
 const playstore = require('./playstore.js');
 
 const app = express();
 
-app.use(morgan('common'));
+app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
   console.log("Nick's Google Playstore API");
@@ -69,6 +71,4 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(8080, () => {
-  console.log('Server started on PORT 8080');
-});
+module.exports = app;
